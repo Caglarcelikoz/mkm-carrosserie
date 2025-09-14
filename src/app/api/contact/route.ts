@@ -99,8 +99,8 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: "MKM Carrosserie <noreply@mkmcarrosserie.nl>", // Use your verified domain
-      to: [process.env.CONTACT_EMAIL || "info@mkmcarrosserie.nl"],
+      from: "MKM Carrosserie <noreply@mkmcarrosserie.be>", // Use your verified domain
+      to: [process.env.CONTACT_EMAIL || "info@mkmcarrosserie.be"],
       subject: `Nieuwe contactaanvraag van ${validatedData.firstName} ${
         validatedData.lastName
       }${validatedData.service ? ` - ${validatedData.service}` : ""}`,

@@ -3,60 +3,64 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { NAVIGATION, SITE_CONFIG } from "@/lib/constants";
+import { NAVIGATION } from "@/lib/constants";
 
 export function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60 shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b-2 border-primary/20 bg-gradient-to-r from-white via-blue-50/50 to-white backdrop-blur-lg supports-[backdrop-filter]:bg-white/85 shadow-lg">
       <div className="container mx-auto px-4">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-20 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center group">
-            <div className="relative h-12 w-48 sm:h-14 sm:w-56">
+          <Link href="/" className="flex items-center">
+            <div className="relative h-20 w-60 sm:h-24 sm:w-72">
               <Image
                 src="/logo.png"
                 alt="MKM Carrosserie"
                 fill
-                className="object-contain transition-transform group-hover:scale-105"
+                className="object-contain"
                 priority
               />
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {NAVIGATION.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-sm font-semibold text-gray-700 transition-colors hover:text-black relative group"
-              >
-                {item.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all group-hover:w-full"></span>
-              </Link>
-            ))}
+          <nav className="hidden md:flex items-center space-x-8">
+            {NAVIGATION.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`relative text-sm font-semibold transition-all duration-300 pb-1 ${
+                    isActive
+                      ? "text-primary"
+                      : "text-gray-700 hover:text-primary"
+                  }`}
+                >
+                  {item.name}
+                  <span
+                    className={`absolute bottom-0 left-0 w-full h-0.5 bg-primary transition-all duration-300 ${
+                      isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                    }`}
+                  ></span>
+                </Link>
+              );
+            })}
           </nav>
-
-          {/* CTA Section */}
-          <div className="hidden lg:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-gray-600">
-              <Phone className="h-4 w-4" />
-              <span className="font-medium">{SITE_CONFIG.phone}</span>
-            </div>
-            <Button asChild className="bg-black hover:bg-gray-800 text-white">
-              <Link href="/contact">Gratis Offerte</Link>
-            </Button>
-          </div>
 
           {/* Mobile menu button */}
           <Button
             variant="ghost"
             size="icon"
-            className="lg:hidden text-gray-700 hover:text-black"
+            className="md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? (
@@ -67,32 +71,31 @@ export function Header() {
           </Button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden border-t bg-white">
-            <div className="px-4 pt-4 pb-6 space-y-3">
-              {NAVIGATION.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="block px-3 py-3 text-base font-semibold text-gray-700 hover:text-black hover:bg-gray-50 rounded-lg transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
-              <div className="pt-4 border-t">
-                <div className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 mb-3">
-                  <Phone className="h-4 w-4" />
-                  <span className="font-medium">{SITE_CONFIG.phone}</span>
-                </div>
-                <Button
-                  asChild
-                  className="w-full bg-black hover:bg-gray-800 text-white"
-                >
-                  <Link href="/contact">Gratis Offerte</Link>
-                </Button>
-              </div>
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 border-t-2 border-primary/20 bg-gradient-to-b from-white to-blue-50/30 backdrop-blur-md">
+              {NAVIGATION.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`relative block px-4 py-3 text-base font-semibold transition-all duration-200 ${
+                      isActive
+                        ? "text-primary"
+                        : "text-gray-700 hover:text-primary"
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.name}
+                    <span
+                      className={`absolute bottom-0 left-4 right-4 h-0.5 bg-primary transition-all duration-200 ${
+                        isActive ? "scale-x-100" : "scale-x-0"
+                      }`}
+                    ></span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

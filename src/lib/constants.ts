@@ -16,7 +16,6 @@ export const SITE_CONFIG = {
 export const NAVIGATION = [
   { name: "Home", href: "/" },
   { name: "Diensten", href: "/services" },
-  { name: "Galerij", href: "/gallery" },
   { name: "Contact", href: "/contact" },
 ] as const;
 

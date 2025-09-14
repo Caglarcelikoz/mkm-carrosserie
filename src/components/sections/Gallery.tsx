@@ -1,378 +1,355 @@
-"use client";
+// TODO: Gallery component - Later toevoegen
+// "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  ChevronLeft,
-  ChevronRight,
-  X,
-  Car,
-  Wrench,
-  Paintbrush,
-  Settings,
-  Star,
-  CheckCircle,
-} from "lucide-react";
+// import { useState } from "react";
+// import Image from "next/image";
+// import { Button } from "@/components/ui/button";
+// import { Card, CardContent } from "@/components/ui/card";
+// import {
+//   ChevronLeft,
+//   ChevronRight,
+//   X,
+//   Car,
+//   Wrench,
+//   Paintbrush,
+//   Settings,
+//   Star,
+//   CheckCircle,
+// } from "lucide-react";
 
-const galleryCategories = [
-  {
-    id: "all",
-    name: "Alle Werkzaamheden",
-    icon: Car,
-  },
-  {
-    id: "schadeherstel",
-    name: "Schadeherstel",
-    icon: Wrench,
-  },
-  {
-    id: "lakwerk",
-    name: "Lakwerk",
-    icon: Paintbrush,
-  },
-  {
-    id: "carrosserie",
-    name: "Carrosseriewerken",
-    icon: Car,
-  },
-  {
-    id: "onderhoud",
-    name: "Onderhoud",
-    icon: Settings,
-  },
-];
+// const galleryCategories = [
+//   {
+//     id: "all",
+//     name: "Alle Werkzaamheden",
+//     icon: Car,
+//   },
+//   {
+//     id: "schadeherstel",
+//     name: "Schadeherstel",
+//     icon: Wrench,
+//   },
+//   {
+//     id: "lakwerk",
+//     name: "Lakwerk",
+//     icon: Paintbrush,
+//   },
+//   {
+//     id: "carrosserie",
+//     name: "Carrosseriewerken",
+//     icon: Car,
+//   },
+//   {
+//     id: "onderhoud",
+//     name: "Onderhoud",
+//     icon: Settings,
+//   },
+// ];
 
-const galleryImages = [
-  // Schadeherstel
-  {
-    id: 1,
-    src: "https://images.unsplash.com/photo-1549317336-206569e8475c?w=800&h=600&fit=crop",
-    alt: "Auto schadeherstel voor",
-    category: "schadeherstel",
-    title: "Bumper reparatie",
-    description: "Professionele bumper reparatie met originele onderdelen",
-    beforeAfter: true,
-  },
-  {
-    id: 2,
-    src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop",
-    alt: "Deur reparatie werk",
-    category: "schadeherstel",
-    title: "Deur herstel",
-    description: "Complete deur reparatie en lakwerk",
-    beforeAfter: true,
-  },
-  {
-    id: 3,
-    src: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&h=600&fit=crop",
-    alt: "Voorruit reparatie",
-    category: "schadeherstel",
-    title: "Voorruit vervanging",
-    description: "Snelle voorruit vervanging met kwaliteitsgarantie",
-    beforeAfter: false,
-  },
+// const galleryImages = [
+//   // Schadeherstel
+//   {
+//     id: 1,
+//     src: "/images/gallery/schadeherstel-1.jpg",
+//     alt: "Schadeherstel voor behandeling",
+//     category: "schadeherstel",
+//     title: "Voor behandeling",
+//     description: "Schade aan voorbumper en koplampen",
+//   },
+//   {
+//     id: 2,
+//     src: "/images/gallery/schadeherstel-2.jpg",
+//     alt: "Schadeherstel na behandeling",
+//     category: "schadeherstel",
+//     title: "Na behandeling",
+//     description: "Perfect herstel van alle schade",
+//   },
+//   {
+//     id: 3,
+//     src: "/images/gallery/schadeherstel-3.jpg",
+//     alt: "Bumper reparatie",
+//     category: "schadeherstel",
+//     title: "Bumper reparatie",
+//     description: "Professionele bumper reparatie",
+//   },
+//   // Lakwerk
+//   {
+//     id: 4,
+//     src: "/images/gallery/lakwerk-1.jpg",
+//     alt: "Lakwerk voor behandeling",
+//     category: "lakwerk",
+//     title: "Voor lakwerk",
+//     description: "Voorbereiding voor lakwerk",
+//   },
+//   {
+//     id: 5,
+//     src: "/images/gallery/lakwerk-2.jpg",
+//     alt: "Lakwerk na behandeling",
+//     category: "lakwerk",
+//     title: "Na lakwerk",
+//     description: "Perfecte lakwerk afwerking",
+//   },
+//   {
+//     id: 6,
+//     src: "/images/gallery/lakwerk-3.jpg",
+//     alt: "Spuitcabine werk",
+//     category: "lakwerk",
+//     title: "Spuitcabine",
+//     description: "Professionele spuitcabine werk",
+//   },
+//   // Carrosseriewerken
+//   {
+//     id: 7,
+//     src: "/images/gallery/carrosserie-1.jpg",
+//     alt: "Carrosserie reparatie",
+//     category: "carrosserie",
+//     title: "Carrosserie reparatie",
+//     description: "Vakmanschap in carrosseriewerken",
+//   },
+//   {
+//     id: 8,
+//     src: "/images/gallery/carrosserie-2.jpg",
+//     alt: "Deur reparatie",
+//     category: "carrosserie",
+//     title: "Deur reparatie",
+//     description: "Precisie werk aan deuren",
+//   },
+//   {
+//     id: 9,
+//     src: "/images/gallery/carrosserie-3.jpg",
+//     alt: "Koffer reparatie",
+//     category: "carrosserie",
+//     title: "Koffer reparatie",
+//     description: "Expertise in koffer reparatie",
+//   },
+//   // Onderhoud
+//   {
+//     id: 10,
+//     src: "/images/gallery/onderhoud-1.jpg",
+//     alt: "Onderhoud werkplaats",
+//     category: "onderhoud",
+//     title: "Onderhoud werkplaats",
+//     description: "Moderne onderhoud faciliteiten",
+//   },
+//   {
+//     id: 11,
+//     src: "/images/gallery/onderhoud-2.jpg",
+//     alt: "Preventief onderhoud",
+//     category: "onderhoud",
+//     title: "Preventief onderhoud",
+//     description: "Regelmatig onderhoud voor optimale prestaties",
+//   },
+//   {
+//     id: 12,
+//     src: "/images/gallery/onderhoud-3.jpg",
+//     alt: "Onderhoud controle",
+//     category: "onderhoud",
+//     title: "Onderhoud controle",
+//     description: "Grondige controle en onderhoud",
+//   },
+// ];
 
-  // Lakwerk
-  {
-    id: 4,
-    src: "https://images.unsplash.com/photo-1486754735734-325b5831c3ad?w=800&h=600&fit=crop",
-    alt: "Auto lakwerk",
-    category: "lakwerk",
-    title: "Complete lakbeurt",
-    description: "Hoogwaardige lakwerkzaamheden met moderne technieken",
-    beforeAfter: true,
-  },
-  {
-    id: 5,
-    src: "https://images.unsplash.com/photo-1562141961-0b0b0b0b0b0b?w=800&h=600&fit=crop",
-    alt: "Spot repair werk",
-    category: "lakwerk",
-    title: "Spot repair",
-    description: "Precisie spot repair voor kleine beschadigingen",
-    beforeAfter: true,
-  },
-  {
-    id: 6,
-    src: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=600&fit=crop",
-    alt: "Kleurmatching",
-    category: "lakwerk",
-    title: "Kleurmatching",
-    description: "Perfecte kleurmatching met spectrometer",
-    beforeAfter: false,
-  },
+// export function Gallery() {
+//   const [selectedCategory, setSelectedCategory] = useState("all");
+//   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+//   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  // Carrosseriewerken
-  {
-    id: 7,
-    src: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=800&h=600&fit=crop",
-    alt: "Carrosserie reparatie",
-    category: "carrosserie",
-    title: "Metaalbewerking",
-    description: "Professionele metaalbewerking en lassen",
-    beforeAfter: true,
-  },
-  {
-    id: 8,
-    src: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&h=600&fit=crop",
-    alt: "Frame rechtzetten",
-    category: "carrosserie",
-    title: "Frame rechtzetten",
-    description: "Precisie frame rechtzetten met moderne apparatuur",
-    beforeAfter: true,
-  },
-  {
-    id: 9,
-    src: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&h=600&fit=crop",
-    alt: "Constructie herstel",
-    category: "carrosserie",
-    title: "Constructie herstel",
-    description: "Uitgebreide constructie herstelwerkzaamheden",
-    beforeAfter: false,
-  },
+//   const filteredImages =
+//     selectedCategory === "all"
+//       ? galleryImages
+//       : galleryImages.filter((image) => image.category === selectedCategory);
 
-  // Onderhoud
-  {
-    id: 10,
-    src: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&h=600&fit=crop",
-    alt: "Motor onderhoud",
-    category: "onderhoud",
-    title: "Motor service",
-    description: "Uitgebreide motor service en onderhoud",
-    beforeAfter: false,
-  },
-  {
-    id: 11,
-    src: "https://images.unsplash.com/photo-1632823471565-1ecdf3d9a4e9?w=800&h=600&fit=crop",
-    alt: "Remmen controle",
-    category: "onderhoud",
-    title: "Remmen controle",
-    description: "Professionele remmen inspectie en service",
-    beforeAfter: false,
-  },
-  {
-    id: 12,
-    src: "https://images.unsplash.com/photo-1642790105077-8a6775a3e8b9?w=800&h=600&fit=crop",
-    alt: "Onderstel werk",
-    category: "onderhoud",
-    title: "Onderstel inspectie",
-    description: "Complete onderstel inspectie en onderhoud",
-    beforeAfter: false,
-  },
+//   const openLightbox = (index: number) => {
+//     setSelectedImage(index);
+//     setCurrentImageIndex(index);
+//   };
 
-  // Extra images voor meer variatie
-  {
-    id: 13,
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop",
-    alt: "Auto reparatie werkplaats",
-    category: "schadeherstel",
-    title: "Werkplaats",
-    description: "Moderne werkplaats met professionele apparatuur",
-    beforeAfter: false,
-  },
-  {
-    id: 14,
-    src: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop",
-    alt: "Auto detailing",
-    category: "lakwerk",
-    title: "Detailing",
-    description: "Professionele auto detailing en polijsten",
-    beforeAfter: false,
-  },
-  {
-    id: 15,
-    src: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop",
-    alt: "Kwaliteitscontrole",
-    category: "carrosserie",
-    title: "Kwaliteitscontrole",
-    description: "Uitgebreide kwaliteitscontrole voor elke reparatie",
-    beforeAfter: false,
-  },
-];
+//   const closeLightbox = () => {
+//     setSelectedImage(null);
+//   };
 
-export function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedImage, setSelectedImage] = useState<
-    (typeof galleryImages)[0] | null
-  >(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+//   const nextImage = () => {
+//     const nextIndex = (currentImageIndex + 1) % filteredImages.length;
+//     setCurrentImageIndex(nextIndex);
+//   };
 
-  const filteredImages =
-    selectedCategory === "all"
-      ? galleryImages
-      : galleryImages.filter((img) => img.category === selectedCategory);
+//   const prevImage = () => {
+//     const prevIndex =
+//       currentImageIndex === 0
+//         ? filteredImages.length - 1
+//         : currentImageIndex - 1;
+//     setCurrentImageIndex(prevIndex);
+//   };
 
-  const openLightbox = (image: (typeof galleryImages)[0], index: number) => {
-    setSelectedImage(image);
-    setCurrentImageIndex(index);
-  };
+//   const handleKeyDown = (e: React.KeyboardEvent) => {
+//     if (e.key === "Escape") closeLightbox();
+//     if (e.key === "ArrowRight") nextImage();
+//     if (e.key === "ArrowLeft") prevImage();
+//   };
 
-  const closeLightbox = () => {
-    setSelectedImage(null);
-  };
+//   return (
+//     <section className="py-16 bg-gray-50">
+//       <div className="container mx-auto px-4">
+//         {/* Header */}
+//         <div className="text-center mb-12">
+//           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+//             Onze Werkzaamheden
+//           </h2>
+//           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+//             Bekijk onze uitgevoerde projecten en laat u inspireren door ons
+//             vakmanschap in carrosseriewerken.
+//           </p>
+//         </div>
 
-  const navigateImage = (direction: "prev" | "next") => {
-    const newIndex =
-      direction === "prev"
-        ? (currentImageIndex - 1 + filteredImages.length) %
-          filteredImages.length
-        : (currentImageIndex + 1) % filteredImages.length;
+//         {/* Category Filter */}
+//         <div className="flex flex-wrap justify-center gap-4 mb-12">
+//           {galleryCategories.map((category) => {
+//             const Icon = category.icon;
+//             return (
+//               <Button
+//                 key={category.id}
+//                 variant={selectedCategory === category.id ? "default" : "outline"}
+//                 onClick={() => setSelectedCategory(category.id)}
+//                 className="flex items-center gap-2 px-6 py-3"
+//               >
+//                 <Icon className="h-4 w-4" />
+//                 {category.name}
+//               </Button>
+//             );
+//           })}
+//         </div>
 
-    setCurrentImageIndex(newIndex);
-    setSelectedImage(filteredImages[newIndex]);
-  };
+//         {/* Gallery Grid */}
+//         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+//           {filteredImages.map((image, index) => (
+//             <Card
+//               key={image.id}
+//               className="group cursor-pointer overflow-hidden hover:shadow-lg transition-all duration-300"
+//               onClick={() => openLightbox(index)}
+//             >
+//               <div className="relative aspect-video overflow-hidden">
+//                 <Image
+//                   src={image.src}
+//                   alt={image.alt}
+//                   fill
+//                   className="object-cover group-hover:scale-105 transition-transform duration-300"
+//                 />
+//                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
+//                   <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+//                     <div className="bg-white/90 backdrop-blur-sm rounded-full p-3">
+//                       <Star className="h-6 w-6 text-primary" />
+//                     </div>
+//                   </div>
+//                 </div>
+//               </div>
+//               <CardContent className="p-4">
+//                 <h3 className="font-semibold text-gray-900 mb-2">
+//                   {image.title}
+//                 </h3>
+//                 <p className="text-sm text-gray-600">{image.description}</p>
+//               </CardContent>
+//             </Card>
+//           ))}
+//         </div>
 
-  return (
-    <div className="bg-background">
-      {/* Hero Section */}
-      <section className="py-12 bg-gradient-to-b from-primary/5 to-background">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h1 className="text-5xl lg:text-6xl font-bold">Onze Galerij</h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Bekijk ons werk! Voor en na foto's van carrosseriewerken,
-              schadeherstel, lakwerk en meer. Kwaliteitswerk met 25+ jaar
-              ervaring.
-            </p>
-            <div className="flex items-center justify-center space-x-2 text-sm text-muted-foreground">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span>Alle werkzaamheden uitgevoerd door ervaren vakmensen</span>
-            </div>
-          </div>
-        </div>
-      </section>
+//         {/* Lightbox */}
+//         {selectedImage !== null && (
+//           <div
+//             className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+//             onClick={closeLightbox}
+//             onKeyDown={handleKeyDown}
+//             tabIndex={0}
+//           >
+//             <div className="relative max-w-4xl max-h-full">
+//               <Button
+//                 variant="ghost"
+//                 size="icon"
+//                 className="absolute top-4 right-4 z-10 bg-white/20 hover:bg-white/30 text-white"
+//                 onClick={closeLightbox}
+//               >
+//                 <X className="h-6 w-6" />
+//               </Button>
 
-      {/* Category Filter */}
-      <section className="py-8 bg-background border-b">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-wrap justify-center gap-4">
-            {galleryCategories.map((category) => {
-              const Icon = category.icon;
-              return (
-                <Button
-                  key={category.id}
-                  variant={
-                    selectedCategory === category.id ? "default" : "outline"
-                  }
-                  onClick={() => setSelectedCategory(category.id)}
-                  className="flex items-center space-x-2"
-                >
-                  <Icon className="h-4 w-4" />
-                  <span>{category.name}</span>
-                </Button>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+//               <Button
+//                 variant="ghost"
+//                 size="icon"
+//                 className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white"
+//                 onClick={prevImage}
+//               >
+//                 <ChevronLeft className="h-6 w-6" />
+//               </Button>
 
-      {/* Gallery Grid */}
-      <section className="py-12 pb-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredImages.map((image, index) => (
-              <Card
-                key={image.id}
-                className="group cursor-pointer hover:shadow-lg transition-all duration-300 border-2"
-                onClick={() => openLightbox(image, index)}
-              >
-                <div className="relative h-64 overflow-hidden rounded-t-lg">
-                  <Image
-                    src={image.src}
-                    alt={image.alt}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {image.beforeAfter && (
-                    <div className="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium flex items-center space-x-1">
-                      <CheckCircle className="h-4 w-4" />
-                      <span>Voor/Naa</span>
-                    </div>
-                  )}
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold mb-2">{image.title}</h3>
-                  <p className="text-muted-foreground">{image.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+//               <Button
+//                 variant="ghost"
+//                 size="icon"
+//                 className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 text-white"
+//                 onClick={nextImage}
+//               >
+//                 <ChevronRight className="h-6 w-6" />
+//               </Button>
 
-          {filteredImages.length === 0 && (
-            <div className="text-center py-20">
-              <p className="text-xl text-muted-foreground">
-                Geen afbeeldingen gevonden voor deze categorie.
-              </p>
-            </div>
-          )}
-        </div>
-      </section>
+//               <div className="relative aspect-video max-h-[80vh]">
+//                 <Image
+//                   src={filteredImages[currentImageIndex].src}
+//                   alt={filteredImages[currentImageIndex].alt}
+//                   fill
+//                   className="object-contain"
+//                 />
+//               </div>
 
-      {/* Lightbox Modal */}
-      {selectedImage && (
-        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-          <div className="relative max-w-4xl max-h-full">
-            {/* Close Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white"
-              onClick={closeLightbox}
-            >
-              <X className="h-6 w-6" />
-            </Button>
+//               <div className="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg p-4">
+//                 <h3 className="font-semibold text-gray-900 mb-2">
+//                   {filteredImages[currentImageIndex].title}
+//                 </h3>
+//                 <p className="text-sm text-gray-600">
+//                   {filteredImages[currentImageIndex].description}
+//                 </p>
+//               </div>
+//             </div>
+//           </div>
+//         )}
 
-            {/* Navigation Buttons */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
-              onClick={() => navigateImage("prev")}
-            >
-              <ChevronLeft className="h-6 w-6" />
-            </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-black/50 hover:bg-black/70 text-white"
-              onClick={() => navigateImage("next")}
-            >
-              <ChevronRight className="h-6 w-6" />
-            </Button>
+//         {/* Trust Indicators */}
+//         <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+//           <div className="text-center">
+//             <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+//               <CheckCircle className="h-8 w-8 text-primary" />
+//             </div>
+//             <h3 className="text-xl font-semibold text-gray-900 mb-2">
+//               Kwaliteitsgarantie
+//             </h3>
+//             <p className="text-gray-600">
+//               Al onze werkzaamheden worden uitgevoerd met de hoogste
+//               kwaliteitsstandaarden.
+//             </p>
+//           </div>
 
-            {/* Image */}
-            <div className="relative">
-              <Image
-                src={selectedImage.src}
-                alt={selectedImage.alt}
-                width={800}
-                height={600}
-                className="rounded-lg max-h-[80vh] object-contain"
-              />
+//           <div className="text-center">
+//             <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+//               <Star className="h-8 w-8 text-primary" />
+//             </div>
+//             <h3 className="text-xl font-semibold text-gray-900 mb-2">
+//               Ervaren Team
+//             </h3>
+//             <p className="text-gray-600">
+//               Ons team heeft jarenlange ervaring in alle aspecten van
+//               carrosseriewerken.
+//             </p>
+//           </div>
 
-              {/* Image Info */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
-                <h3 className="text-2xl font-bold text-white mb-2">
-                  {selectedImage.title}
-                </h3>
-                <p className="text-white/90">{selectedImage.description}</p>
-                <div className="flex items-center justify-between mt-4">
-                  <span className="text-white/70">
-                    {currentImageIndex + 1} van {filteredImages.length}
-                  </span>
-                  {selectedImage.beforeAfter && (
-                    <div className="flex items-center space-x-1 text-green-400">
-                      <CheckCircle className="h-4 w-4" />
-                      <span className="text-sm">Voor/Naa werk</span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
+//           <div className="text-center">
+//             <div className="bg-primary/10 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+//               <Settings className="h-8 w-8 text-primary" />
+//             </div>
+//             <h3 className="text-xl font-semibold text-gray-900 mb-2">
+//               Moderne Apparatuur
+//             </h3>
+//             <p className="text-gray-600">
+//               We gebruiken de nieuwste technologie en apparatuur voor optimale
+//               resultaten.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
