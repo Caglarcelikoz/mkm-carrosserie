@@ -97,22 +97,20 @@ export function Services() {
             return (
               <Card
                 key={index}
-                className="border border-white/20 bg-primary text-primary-foreground overflow-hidden relative"
+                className="border-0 shadow-xl shadow-black/20 hover:shadow-2xl hover:shadow-black/30 transition-all duration-300 bg-white/95 backdrop-blur-sm hover:scale-105 rounded-3xl overflow-hidden relative"
               >
-                {/* Liquid glass overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 via-white/5 to-transparent"></div>
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900/5 via-transparent to-transparent rounded-3xl"></div>
 
                 <CardHeader className="pb-4 relative z-10">
                   <div className="flex items-start space-x-4">
-                    <div className="p-4 bg-white/20 backdrop-blur-sm border border-white/30 rounded-2xl flex-shrink-0">
-                      <Icon className="h-10 w-10 text-primary-foreground" />
+                    <div className="p-4 bg-gradient-to-br from-primary/20 to-primary/10 rounded-full shadow-sm">
+                      <Icon className="h-8 w-8 text-primary" />
                     </div>
                     <div className="flex-1">
                       <CardTitle className="text-2xl mb-2">
                         {service.title}
                       </CardTitle>
-                      <CardDescription className="text-lg leading-relaxed text-primary-foreground/80">
+                      <CardDescription className="text-lg leading-relaxed">
                         {service.description}
                       </CardDescription>
                     </div>
@@ -122,16 +120,13 @@ export function Services() {
                 <CardContent className="space-y-6 relative z-10">
                   {/* Service Details */}
                   <div>
-                    <h4 className="font-semibold mb-3 text-primary-foreground">
+                    <h4 className="font-semibold mb-3 text-lg">
                       Wat wij doen:
                     </h4>
                     <ul className="space-y-2">
                       {service.details.map((detail, idx) => (
-                        <li
-                          key={idx}
-                          className="flex items-center space-x-2 text-primary-foreground/80"
-                        >
-                          <CheckCircle className="h-4 w-4 text-green-500 flex-shrink-0" />
+                        <li key={idx} className="flex items-center space-x-3">
+                          <div className="w-2 h-2 bg-primary rounded-full flex-shrink-0"></div>
                           <span>{detail}</span>
                         </li>
                       ))}
@@ -140,14 +135,14 @@ export function Services() {
 
                   {/* Features */}
                   <div>
-                    <h4 className="font-semibold mb-3 text-primary-foreground">
+                    <h4 className="font-semibold mb-3 text-lg">
                       Waarom kiezen voor ons:
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {service.features.map((feature, idx) => (
                         <span
                           key={idx}
-                          className="px-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 text-primary-foreground rounded-full text-sm font-medium"
+                          className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium"
                         >
                           {feature}
                         </span>
@@ -158,32 +153,6 @@ export function Services() {
               </Card>
             );
           })}
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center">
-          <div className="space-y-6">
-            <h3 className="text-2xl lg:text-3xl font-bold">
-              Klaar om uw voertuig te laten repareren?
-            </h3>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Neem contact met ons op voor een gratis offerte of advies. Wij
-              helpen u graag verder!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="px-8 py-4 text-lg" asChild>
-                <Link href="/contact">Gratis Offerte Aanvragen</Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg"
-                asChild
-              >
-                <Link href="/services">Alle Diensten Bekijken</Link>
-              </Button>
-            </div>
-          </div>
         </div>
       </div>
     </section>

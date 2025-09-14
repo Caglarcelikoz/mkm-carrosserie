@@ -94,6 +94,50 @@ export function Hero() {
               <span className="text-white font-medium">Snelle Service</span>
             </div>
           </div>
+
+          {/* Stats Section */}
+          <div className="mt-20 max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-16">
+              {/* 25+ Jaar Ervaring */}
+              <div className="text-center">
+                <div className="text-4xl lg:text-5xl font-bold text-white mb-2 leading-none">
+                  25+
+                </div>
+                <div className="text-white/90 text-base font-medium mb-1">
+                  Jaar Ervaring
+                </div>
+                <div className="w-12 h-0.5 bg-white/60 mx-auto"></div>
+              </div>
+
+              {/* Separator */}
+              <div className="hidden sm:block w-px h-20 bg-white/30"></div>
+
+              {/* 100% Kwaliteitsgarantie */}
+              <div className="text-center">
+                <div className="text-4xl lg:text-5xl font-bold text-white mb-2 leading-none">
+                  100%
+                </div>
+                <div className="text-white/90 text-base font-medium mb-1">
+                  Kwaliteitsgarantie
+                </div>
+                <div className="w-12 h-0.5 bg-white/60 mx-auto"></div>
+              </div>
+
+              {/* Separator */}
+              <div className="hidden sm:block w-px h-20 bg-white/30"></div>
+
+              {/* 24/7 Service */}
+              <div className="text-center">
+                <div className="text-4xl lg:text-5xl font-bold text-white mb-2 leading-none">
+                  24/7
+                </div>
+                <div className="text-white/90 text-base font-medium mb-1">
+                  Service Beschikbaar
+                </div>
+                <div className="w-12 h-0.5 bg-white/60 mx-auto"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
