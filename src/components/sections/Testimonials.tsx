@@ -52,7 +52,7 @@ export function Testimonials() {
                   ))}
                 </div>
                 <p className="text-muted-foreground mb-4 italic">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
                 <div className="border-t pt-4">
                   <div className="font-semibold">{testimonial.name}</div>

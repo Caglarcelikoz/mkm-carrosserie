@@ -5,19 +5,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import {
-  Wrench,
-  Paintbrush,
-  Car,
-  Settings,
-  CheckCircle,
-  Clock,
-  Shield,
-  Award,
-  Users,
-} from "lucide-react";
-import Link from "next/link";
+import { Wrench, Paintbrush, Car, Settings } from "lucide-react";
 
 const services = [
   {
