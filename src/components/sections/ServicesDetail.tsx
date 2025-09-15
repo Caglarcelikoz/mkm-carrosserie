@@ -133,7 +133,7 @@ export function ServicesDetail() {
     name: "MKM Carrosserie",
     description:
       "Professionele carrosseriediensten in België. Schadeherstel, lakwerk, carrosseriewerken en onderhoud.",
-    url: "https://mkmcarrosserie.nl",
+    url: "https://mkmcarrosserie.be",
     telephone: "+32 484 81 89 83",
     address: {
       "@type": "PostalAddress",

@@ -23,7 +23,7 @@ const contactSchema = z.object({
   service: z.string().optional(),
   message: z
     .string()
-    .min(10, "Bericht moet minimaal 10 karakters bevatten")
+    .min(3, "Bericht moet minimaal 3 karakters bevatten")
     .max(1000, "Bericht is te lang"),
 });
 
@@ -62,7 +62,9 @@ export async function POST(request: NextRequest) {
   try {
     // Get client IP for rate limiting
     const ip =
-      request.ip || request.headers.get("x-forwarded-for") || "unknown";
+      request.headers.get("x-forwarded-for") ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
 
     // Check rate limit
     if (!checkRateLimit(ip)) {
@@ -138,7 +140,7 @@ export async function POST(request: NextRequest) {
           <div style="margin-top: 20px; padding: 15px; background: #e8f4f8; border-radius: 5px;">
             <p style="margin: 0; color: #666; font-size: 14px;">
               <strong>Verzonden op:</strong> ${new Date().toLocaleString(
-                "nl-NL"
+                "nl-BE"
               )}<br>
               <strong>IP-adres:</strong> ${ip}
             </p>
@@ -157,8 +159,7 @@ ${validatedData.phone ? `- Telefoon: ${validatedData.phone}` : ""}
 Bericht:
 ${validatedData.message}
 
-Verzonden op: ${new Date().toLocaleString("nl-NL")}
-IP-adres: ${ip}
+Verzonden op: ${new Date().toLocaleString("nl-BE")}
       `,
     });
 
@@ -188,7 +189,7 @@ IP-adres: ${ip}
       return NextResponse.json(
         {
           error: "Ongeldige gegevens",
-          details: error.errors.map((err) => err.message),
+          details: error.issues.map((err) => err.message),
         },
         { status: 400 }
       );
