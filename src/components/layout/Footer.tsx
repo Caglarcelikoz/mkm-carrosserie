@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { CookieSettingsButton } from "@/components/CookieConsent";
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -139,8 +140,20 @@ export function Footer() {
                 </a>
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row items-center gap-4 text-sm text-primary-foreground/60">
-              <span>BTW: BE 0802.101.908</span>
+            <div className="flex flex-col items-center lg:items-end gap-2 text-sm text-primary-foreground/60 text-center lg:text-right">
+              <p>
+                MKM Solutions BV · Toekomstlaan 13, 3600 Genk · BTW BE
+                0802.101.908 · RPR Antwerpen, afd. Hasselt
+              </p>
+              <div className="flex items-center gap-4">
+                <Link
+                  href="/privacy"
+                  className="hover:text-primary-foreground transition-colors"
+                >
+                  Privacy- en cookiebeleid
+                </Link>
+                <CookieSettingsButton className="hover:text-primary-foreground transition-colors cursor-pointer" />
+              </div>
             </div>
           </div>
         </div>

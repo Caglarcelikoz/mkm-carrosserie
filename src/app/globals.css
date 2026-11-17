@@ -35,3 +35,37 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Cookie banner (vanilla-cookieconsent) in MKM's black-and-white palette. */
+#cc-main {
+  --cc-font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+  --cc-bg: #ffffff;
+  --cc-primary-color: #000000;
+  --cc-secondary-color: #666666;
+  --cc-link-color: #000000;
+  --cc-modal-border-radius: 1rem;
+  --cc-btn-border-radius: 0.5rem;
+  --cc-btn-primary-bg: #000000;
+  --cc-btn-primary-color: #ffffff;
+  --cc-btn-primary-border-color: #000000;
+  --cc-btn-primary-hover-bg: #262626;
+  --cc-btn-primary-hover-color: #ffffff;
+  --cc-btn-primary-hover-border-color: #262626;
+  --cc-btn-secondary-bg: #f5f5f5;
+  --cc-btn-secondary-color: #000000;
+  --cc-btn-secondary-border-color: #e5e5e5;
+  --cc-btn-secondary-hover-bg: #e5e5e5;
+  --cc-btn-secondary-hover-color: #000000;
+  --cc-btn-secondary-hover-border-color: #d4d4d4;
+  --cc-separator-border-color: #e5e5e5;
+  --cc-toggle-on-bg: #000000;
+  --cc-toggle-off-bg: #a3a3a3;
+  --cc-toggle-on-knob-bg: #ffffff;
+  --cc-toggle-readonly-bg: #d4d4d4;
+  --cc-section-category-border: #e5e5e5;
+  --cc-cookie-category-block-bg: #f5f5f5;
+  --cc-cookie-category-block-border: #e5e5e5;
+  --cc-cookie-category-block-hover-bg: #ebebeb;
+  --cc-cookie-category-block-hover-border: #d4d4d4;
+  --cc-overlay-bg: rgba(0, 0, 0, 0.6);
+}

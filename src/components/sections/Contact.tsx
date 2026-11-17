@@ -19,6 +19,7 @@ import {
 } from "lucide-react";
 import { SITE_CONFIG } from "@/lib/constants";
 import { useState } from "react";
+import Link from "next/link";
 
 interface FormData {
   firstName: string;
@@ -486,6 +487,17 @@ export function Contact({ showHeader = true }: ContactProps) {
                       </>
                     )}
                   </Button>
+                  <p className="text-sm text-muted-foreground text-center">
+                    We gebruiken uw gegevens alleen om op uw aanvraag te
+                    antwoorden. Lees meer in ons{" "}
+                    <Link
+                      href="/privacy"
+                      className="underline underline-offset-4 hover:text-foreground"
+                    >
+                      privacybeleid
+                    </Link>
+                    .
+                  </p>
                 </form>
               </CardContent>
             </Card>
